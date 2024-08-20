@@ -1,23 +1,17 @@
-# v1.0.1-beta
+# v1.1.0-beta
 
-## update.sh (NEW)
+## define.sh
 
--   updates all repos or clone them if they don't exist
--   respect the branch environment variable
--   runs post_update script if found
-
-## define.sh (NEW)
-
--   sets the environment variables branch, level and server
--   adds them to bashrc
--   removes itself from running at startup
-
-## post_update.sh (NEW)
-
--   adds the new updated update script to startup
+-   adds env variables, and update.sh to crontab
 
 ## init.sh
 
--   sets repos names as environment variables
--   adds them to bashrc
--   setup update.sh and define.sh to run at startup
+-   adds env variables to crontab
+-   asks user before shutdown
+-   set a crontab script to rm log file every ten days
+
+## update.sh
+
+-   logs to .dns-logs file
+-   checks if branch env variable exists first
+-   fixes the hostname every time it runs

@@ -16,6 +16,8 @@ fi
 
 cd $HOME
 
+sudo hostname $server-$level-dns-mafazaa
+
 for repo in $DNS_CHECK $DNS_INIT $DNS_IP_CONFIRM $DNS_SERVER;
 do
     # go to that repo, fetch latest updates, update current version to it, and finally enable execution

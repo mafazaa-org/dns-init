@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "branch [dev, test, prod]:"
 read branch
 echo "level [high, low]:" 
@@ -24,6 +26,6 @@ echo level=$level >> $crontab_file
 echo branch=$branch >> $crontab_file
 echo server=$server >> $crontab_file
 
-echo 00 0~2 * * * $home/dns-init/update.sh
+echo 00 ~ * * * $home/dns-init/update.sh
 
 sudo hostname $server-$level-dns.mafazaa.com

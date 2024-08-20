@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## installing python and pip
 cd ~/
 
@@ -32,6 +34,8 @@ echo DNS_INIT=$DNS_INIT >> $crontab_file
 echo DNS_SERVER=$DNS_SERVER >> $crontab_file
 echo DNS_CHECK=$DNS_CHECK >> $crontab_file
 echo DNS_IP_CONFIRM=$DNS_IP_CONFIRM >> $crontab_file
+
+echo 0 0 0 0-30/10 * rm /home/dns-admin/.dns-logs
 
 
 ## freeing port 53

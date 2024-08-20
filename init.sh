@@ -1,4 +1,5 @@
 ## installing python and pip
+cd ~/
 
 echo
 echo updating packages
@@ -27,5 +28,29 @@ echo
 echo congratulations, now we are going to shutdown the system
 echo 
 read
+
+# setting repos environment variables
+
+export DNS_REPOS_ROOT=https://github.com/mafazaa-org/
+export DNS_INIT=dns-init
+export DNS_SERVER=dns-server
+export DNS_CHECK=dns-check
+export DNS_IP_CONFIRM=dns-ip-confirm
+
+echo export DNS_REPOS_ROOT=https://github.com/mafazaa-org/ >> ~/.bashrc
+echo export DNS_INIT=dns-init >> ~/.bashrc
+echo export DNS_SERVER=dns-server >> ~/.bashrc
+echo export DNS_CHECK=dns-check >> ~/.bashrc
+echo export DNS_IP_CONFIRM=dns-ip-confirm >> ~/.bashrc
+
+source ~/.bashrc
+
+# setting up startup scripts
+
+echo setting up startup scripts
+
+sudo cp define.sh /etc/init.d/dns_define
+sudo cp update.sh /etc/init.d/dns_update
+
 
 sudo shutdown -h now

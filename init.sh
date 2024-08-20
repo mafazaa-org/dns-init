@@ -49,8 +49,4 @@ source ~/.bashrc
 
 echo setting up startup scripts
 
-sudo cp define.sh /etc/init.d/dns_define
-sudo cp update.sh /etc/init.d/dns_update
-
-
 sudo shutdown -h now

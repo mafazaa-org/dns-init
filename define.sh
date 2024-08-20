@@ -16,4 +16,4 @@ echo export server=$server >> ~/.bashrc
 
 source ~/.bashrc
 
-sudo rm /etc/init.d/dns_define
+sudo hostname $server-$level-dns.mafazaa.com

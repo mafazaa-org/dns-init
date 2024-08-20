@@ -1,4 +1,4 @@
-# v1-beta
+# v1.0.1-beta
 
 ## update.sh (NEW)
 

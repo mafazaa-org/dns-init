@@ -13,7 +13,7 @@ sudo apt install python3 python3-pip -y
 
 # setting repos environment variables
 
-export DNS_REPOS_ROOT=https://github.com/mafazaa-org/
+export DNS_REPOS_ROOT=https://github.com/mafazaa-org
 export DNS_INIT=dns-init
 export DNS_SERVER=dns-server
 export DNS_CHECK=dns-check
@@ -52,7 +52,11 @@ sudo cp ~/.ssh /home/dns-admin/.ssh
 
 sudo chown -hR dns-admin /home/dns-admin/.ssh
 
-sudo rm -r -f ~/.ssh
+sudo git clone $DNS_REPOS_ROOT/$DNS_INIT /home/dns-admin/dns-init
+
+echo the next time, login with dns-admin so the script can delete the first user
+
+read
 
 ## freeing port 53
 
@@ -73,7 +77,7 @@ echo
 echo congratulations, now we are going to shutdown the system
 echo 
 
-echo shutdown now? (y/n)
+echo "shutdown now? (y/n)"
 read shutdown_now
 
 if [ shutdown_now == "y" ]; then

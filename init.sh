@@ -45,8 +45,4 @@ echo export DNS_IP_CONFIRM=dns-ip-confirm >> ~/.bashrc
 
 source ~/.bashrc
 
-# setting up startup scripts
-
-echo setting up startup scripts
-
 sudo shutdown -h now

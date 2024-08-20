@@ -37,6 +37,22 @@ echo DNS_IP_CONFIRM=$DNS_IP_CONFIRM >> $crontab_file
 
 echo 0 0 0 0-30/10 * rm /home/dns-admin/.dns-logs
 
+## setup dns-admin user
+
+sudo useradd dns-admin --no-user-group --shell /bin/bash --home-dir /home/dns-admin
+sudo mkdir /home/dns-admin
+
+echo please add the user dns-admin to the sudoers file
+
+read
+
+sudo visudo
+
+sudo cp ~/.ssh /home/dns-admin/.ssh
+
+sudo chown -hR dns-admin /home/dns-admin/.ssh
+
+sudo rm -r -f ~/.ssh
 
 ## freeing port 53
 

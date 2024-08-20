@@ -30,9 +30,15 @@ sudo chown -hR dns-admin $home/.ssh
 
 sudo git clone $DNS_REPOS_ROOT/$DNS_INIT $home/dns-init
 
+echo enter dns-admin password
+
+sudo passwd dns-admin
+
 echo the next time, login with dns-admin so the script can delete the first user
 
 read
+
+sudo su dns-admin
 
 # setting repos environment variables
 
@@ -58,7 +64,7 @@ sudo echo DNS_SERVER=$DNS_SERVER >> $crontab_file
 sudo echo DNS_CHECK=$DNS_CHECK >> $crontab_file
 sudo echo DNS_IP_CONFIRM=$DNS_IP_CONFIRM >> $crontab_file
 
-echo 0 0 0 0-30/10 * rm home/dns-admin/.dns-logs
+sudo echo 0 0 0 0-30/10 * rm home/dns-admin/.dns-logs >> $crontab_file
 
 ## freeing port 53
 
@@ -85,3 +91,6 @@ read shutdown_now
 if [ shutdown_now == "y" ]; then
     sudo shutdown -h now
 fi
+
+echo "notice that you're dns-admin now before you exit"
+read

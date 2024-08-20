@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v1
+## v1-beta
 
 ### update.sh (NEW)
 

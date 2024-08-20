@@ -16,6 +16,12 @@ then simply run the init script
 ./init.sh
 ```
 
+this script sets the update script to run on startup and clone the repos but if you want to do it yourself, you can run it like that
+
+```shell
+./update.sh
+```
+
 ## What the scripts does
 
 -   installs python3 and pip3

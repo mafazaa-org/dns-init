@@ -11,6 +11,14 @@ echo
 echo installing python and pip
 sudo apt install python3 python3-pip -y
 
+## setting up repos environment variables
+
+export DNS_REPOS_ROOT=https://github.com/mafazaa-org
+export DNS_INIT=dns-init
+export DNS_SERVER=dns-server
+export DNS_CHECK=dns-check
+export DNS_IP_CONFIRM=dns-ip-confirm
+
 ## setup dns-admin user
 
 home=/home/dns-admin
@@ -27,7 +35,9 @@ sudo cp ~/.ssh $home/.ssh -r
 
 sudo chown -hR dns-admin $home/.ssh
 
-sudo git clone $DNS_REPOS_ROOT/$DNS_INIT $home/dns-init
+sudo cp ~/$DNS_INIT $home/$DNS_INIT
+
+sudo chown -hR dns-admin $home/$DNS_INIT
 
 echo enter dns-admin password
 
@@ -37,13 +47,7 @@ echo the next time, login with dns-admin so the script can delete the first user
 
 read
 
-# setting repos environment variables
-
-export DNS_REPOS_ROOT=https://github.com/mafazaa-org
-export DNS_INIT=dns-init
-export DNS_SERVER=dns-server
-export DNS_CHECK=dns-check
-export DNS_IP_CONFIRM=dns-ip-confirm
+# adding env to variables
 
 echo export DNS_REPOS_ROOT=$DNS_REPOS_ROOT >> ~/.bashrc
 echo export DNS_INIT=$DNS_INIT >> ~/.bashrc

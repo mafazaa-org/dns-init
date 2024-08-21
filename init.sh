@@ -24,7 +24,7 @@ read
 
 sudo visudo
 
-sudo cp ~/.ssh $home/.ssh
+sudo cp ~/.ssh $home/.ssh -r
 
 sudo chown -hR dns-admin $home/.ssh
 
@@ -38,8 +38,6 @@ echo the next time, login with dns-admin so the script can delete the first user
 
 read
 
-sudo su dns-admin
-
 # setting repos environment variables
 
 export DNS_REPOS_ROOT=https://github.com/mafazaa-org
@@ -48,15 +46,19 @@ export DNS_SERVER=dns-server
 export DNS_CHECK=dns-check
 export DNS_IP_CONFIRM=dns-ip-confirm
 
-echo export DNS_REPOS_ROOT=$DNS_REPOS_ROOT >> $home/.bashrc
-echo export DNS_INIT=$DNS_INIT >> $home/.bashrc
-echo export DNS_SERVER=$DNS_SERVER >> $home/.bashrc
-echo export DNS_CHECK=$DNS_CHECK >> $home/.bashrc
-echo export DNS_IP_CONFIRM=$DNS_IP_CONFIRM >> $home/.bashrc
+echo export DNS_REPOS_ROOT=$DNS_REPOS_ROOT >> ~/.bashrc
+echo export DNS_INIT=$DNS_INIT >> ~/.bashrc
+echo export DNS_SERVER=$DNS_SERVER >> ~/.bashrc
+echo export DNS_CHECK=$DNS_CHECK >> ~/.bashrc
+echo export DNS_IP_CONFIRM=$DNS_IP_CONFIRM >> ~/.bashrc
 
-source $home/.bashrc
+sudo cp ~/.bashrc $home/
 
-crontab_file=/var/spool/cron/crontabs/dns-admin
+source ~/.bashrc
+
+crontab_file=dns-admin
+
+touch $crontab_file
 
 sudo echo DNS_REPOS_ROOT=$DNS_REPOS_ROOT >> $crontab_file
 sudo echo DNS_INIT=$DNS_INIT >> $crontab_file
@@ -65,6 +67,8 @@ sudo echo DNS_CHECK=$DNS_CHECK >> $crontab_file
 sudo echo DNS_IP_CONFIRM=$DNS_IP_CONFIRM >> $crontab_file
 
 sudo echo 0 0 0 0-30/10 * rm home/dns-admin/.dns-logs >> $crontab_file
+
+sudo cp $crontab_file /var/spool/cron/crontabs/
 
 ## freeing port 53
 
@@ -91,6 +95,3 @@ read shutdown_now
 if [ shutdown_now == "y" ]; then
     sudo shutdown -h now
 fi
-
-echo "notice that you're dns-admin now before you exit"
-read

@@ -15,8 +15,7 @@ sudo apt install python3 python3-pip -y
 
 home=/home/dns-admin
 
-sudo useradd dns-admin --no-user-group --shell /bin/bash --home-dir $home
-sudo mkdir $home
+sudo adduser dns-admin --disabled-password --quiet --comment dns-admin
 
 echo please add the user dns-admin to the sudoers file
 
@@ -65,8 +64,6 @@ sudo echo DNS_INIT=$DNS_INIT >> $crontab_file
 sudo echo DNS_SERVER=$DNS_SERVER >> $crontab_file
 sudo echo DNS_CHECK=$DNS_CHECK >> $crontab_file
 sudo echo DNS_IP_CONFIRM=$DNS_IP_CONFIRM >> $crontab_file
-
-sudo echo 0 0 0 0-30/10 * rm home/dns-admin/.dns-logs >> $crontab_file
 
 sudo cp $crontab_file /var/spool/cron/crontabs/
 

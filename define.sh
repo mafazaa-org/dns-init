@@ -26,6 +26,7 @@ echo level=$level >> $crontab_file
 echo branch=$branch >> $crontab_file
 echo server=$server >> $crontab_file
 
-echo 00 ~ * * * $home/dns-init/update.sh
+echo ~ ~ * * * $home/dns-init/update.sh >> $crontab_file
+echo 0 0 0 0-30/10 * rm home/dns-admin/.dns-logs >> $crontab_file
 
-sudo hostname $server-$level-dns.mafazaa.com
+hostname $server-$level-dns.mafazaa.com

@@ -37,14 +37,13 @@ echo press enter to continue...
 
 useradd -p $(perl -e 'print crypt($ARGV[0], "password")' 'dns-admin') -m $username -s /bin/bash
 
-echo "$username ALL=(ALL:ALL) ALL" >> /etc/sudoers
-
-echo "added dns-admin to sudoers file, do you want to edit the sudoers file?"
+echo "user dns-admin added, this script will add dns-admin to the end of sudoers file! do you want to do that manually? (press any key to manually edit/ enter for automatic edit)"
 read edit
 if [ $edit ]; then
   visudo
+else
+  echo "$username ALL=(ALL:ALL) ALL" >> /etc/sudoers
 fi
-
 
 cp $old_home/.ssh $home/.ssh -r
 

@@ -2,10 +2,6 @@
 
 ## v1
 
--   save as v1-beta
-
-## v1-beta
-
 ### init.sh
 
 -   must run as root

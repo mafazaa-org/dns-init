@@ -77,7 +77,7 @@ cp $crontab_file /var/spool/cron/crontabs/
 ## freeing port 53
 
 echo 
-echo uncomment DNS and DNSStubListener and change them to {your.Dns.Server.ip} and no respectively
+echo uncomment DNS and DNSStubListener and change them to 'primary_server_ip,secondary_server_ip' and no respectively
 echo 
 echo press enter to continue
 read

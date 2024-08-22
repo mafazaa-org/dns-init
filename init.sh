@@ -25,7 +25,7 @@ export DNS_IP_CONFIRM=dns-ip-confirm
 
 ## setup dns-admin user
 
-ehco please give us the path to the home directory of the current user
+echo please give us the path to the home directory of the current user
 read old_home
 
 username=dns-admin
@@ -34,14 +34,14 @@ home=/home/$username
 
 useradd -p $(perl -e 'print crypt($ARGV[0], "password")' 'dns-admin') -m $username -s /bin/bash
 
-echo "$username ALL=(ALL:ALL) ALL" >> /ets/soduers
+echo "$username ALL=(ALL:ALL) ALL" >> /etc/sudoers
 
 
 cp $old_home/.ssh $home/.ssh -r
 
 chown -hR $username $home/.ssh
 
-cp $old_home/$DNS_INIT $home/$DNS_INIT
+cp $old_home/$DNS_INIT $home/$DNS_INIT -r
 
 chown -hR $username $home/$DNS_INIT
 
@@ -57,7 +57,6 @@ echo export DNS_INIT=$DNS_INIT >> $home/.bashrc
 echo export DNS_SERVER=$DNS_SERVER >> $home/.bashrc
 echo export DNS_CHECK=$DNS_CHECK >> $home/.bashrc
 echo export DNS_IP_CONFIRM=$DNS_IP_CONFIRM >> $home/.bashrc
-echo source ~/.bashrc >> $home/.bashrc
 
 
 crontab_file=$username

@@ -17,10 +17,6 @@ read server
 # setup env variables
 home=/home/dns-admin
 
-export branch=$branch
-export level=$level
-export server=$server
-
 # save variables to .bashrc
 echo export branch=$branch >> $home/.bashrc
 echo export level=$level >> $home/.bashrc

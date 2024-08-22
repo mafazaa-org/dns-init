@@ -91,8 +91,8 @@ echo congratulations, now we are going to shutdown the system
 echo 
 
 echo "shutdown now? (y/n)"
-read shutdown_now
+read shut
 
-if [ shutdown_now == "y" ]; then
+if [ $shut == "y" ]; then
     shutdown -h now
 fi

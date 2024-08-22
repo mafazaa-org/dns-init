@@ -25,12 +25,15 @@ export DNS_IP_CONFIRM=dns-ip-confirm
 
 ## setup dns-admin user
 
-echo please give us the path to the home directory of the current user
-read old_home
+old_home=/home/ubuntu
 
 username=dns-admin
 
 home=/home/$username
+
+echo ATTENTION
+echo username dns-admin will be created right now with the default password dns-admin
+echo press enter to continue...
 
 useradd -p $(perl -e 'print crypt($ARGV[0], "password")' 'dns-admin') -m $username -s /bin/bash
 

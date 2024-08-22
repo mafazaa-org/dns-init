@@ -46,6 +46,14 @@ echo $server_name > /etc/hostname
 
 echo "127.0.0.1 $server_name" >> /etc/hosts
 
+# changing the password for the dns-admin
+
+echo "change default dns-admin password? (y/n)"
+read change
+if [ $change ]; then
+  passwd dns-admin
+fi
+
 # deleting the ubuntu user
 
 if [ $(cat /etc/passwd | grep ubuntu) ]; then

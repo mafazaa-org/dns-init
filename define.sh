@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# make sure user running this script as root
+if [ "$EUID" -ne 0 ]
+  then echo "Please run the script as root"
+  exit
+fi
+
 # get server variables
 echo "branch [dev, test, prod]:"
 read branch
@@ -44,3 +50,8 @@ echo $server_name > /etc/hostname
 
 echo "127.0.0.1 $server_name" >> /etc/hosts
 
+# deleting the ubuntu user
+
+if [ $(cat /etc/passwd | grep ubuntu) ]; then
+  deluser --remove-home --remove-all-files ubuntu
+fi

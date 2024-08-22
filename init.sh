@@ -1,15 +1,19 @@
 #!/bin/bash
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run the script as root"
+  exit
+fi
+
 ## installing python and pip
-cd ~/
 
 echo
 echo updating packages
-sudo apt update
+apt update
 
 echo
 echo installing python and pip
-sudo apt install python3 python3-pip -y
+apt install python3 python3-pip -y
 
 ## setting up repos environment variables
 
@@ -21,55 +25,52 @@ export DNS_IP_CONFIRM=dns-ip-confirm
 
 ## setup dns-admin user
 
-home=/home/dns-admin
+ehco please give us the path to the home directory of the current user
+read old_home
 
-sudo adduser dns-admin --disabled-password --quiet --comment dns-admin
+username=dns-admin
 
-echo please add the user dns-admin to the sudoers file
+home=/home/$username
 
-read
+useradd -p $(perl -e 'print crypt($ARGV[0], "password")' 'dns-admin') -m $username -s /bin/bash
 
-sudo visudo
+echo "$username ALL=(ALL:ALL) ALL" >> /ets/soduers
 
-sudo cp ~/.ssh $home/.ssh -r
 
-sudo chown -hR dns-admin $home/.ssh
+cp $old_home/.ssh $home/.ssh -r
 
-sudo cp ~/$DNS_INIT $home/$DNS_INIT
+chown -hR $username $home/.ssh
 
-sudo chown -hR dns-admin $home/$DNS_INIT
+cp $old_home/$DNS_INIT $home/$DNS_INIT
 
-echo enter dns-admin password
+chown -hR $username $home/$DNS_INIT
 
-sudo passwd dns-admin
 
-echo the next time, login with dns-admin so the script can delete the first user
+echo the next time, login with $username
 
 read
 
 # adding env to variables
 
-echo export DNS_REPOS_ROOT=$DNS_REPOS_ROOT >> ~/.bashrc
-echo export DNS_INIT=$DNS_INIT >> ~/.bashrc
-echo export DNS_SERVER=$DNS_SERVER >> ~/.bashrc
-echo export DNS_CHECK=$DNS_CHECK >> ~/.bashrc
-echo export DNS_IP_CONFIRM=$DNS_IP_CONFIRM >> ~/.bashrc
+echo export DNS_REPOS_ROOT=$DNS_REPOS_ROOT >> $home/.bashrc
+echo export DNS_INIT=$DNS_INIT >> $home/.bashrc
+echo export DNS_SERVER=$DNS_SERVER >> $home/.bashrc
+echo export DNS_CHECK=$DNS_CHECK >> $home/.bashrc
+echo export DNS_IP_CONFIRM=$DNS_IP_CONFIRM >> $home/.bashrc
+echo source ~/.bashrc >> $home/.bashrc
 
-sudo cp ~/.bashrc $home/
 
-source ~/.bashrc
-
-crontab_file=dns-admin
+crontab_file=$username
 
 touch $crontab_file
 
-sudo echo DNS_REPOS_ROOT=$DNS_REPOS_ROOT >> $crontab_file
-sudo echo DNS_INIT=$DNS_INIT >> $crontab_file
-sudo echo DNS_SERVER=$DNS_SERVER >> $crontab_file
-sudo echo DNS_CHECK=$DNS_CHECK >> $crontab_file
-sudo echo DNS_IP_CONFIRM=$DNS_IP_CONFIRM >> $crontab_file
+echo DNS_REPOS_ROOT=$DNS_REPOS_ROOT >> $crontab_file
+echo DNS_INIT=$DNS_INIT >> $crontab_file
+echo DNS_SERVER=$DNS_SERVER >> $crontab_file
+echo DNS_CHECK=$DNS_CHECK >> $crontab_file
+echo DNS_IP_CONFIRM=$DNS_IP_CONFIRM >> $crontab_file
 
-sudo cp $crontab_file /var/spool/cron/crontabs/
+cp $crontab_file /var/spool/cron/crontabs/
 
 ## freeing port 53
 
@@ -79,12 +80,12 @@ echo
 echo press enter to continue
 read
 
-sudo nano /etc/systemd/resolved.conf
+nano /etc/systemd/resolved.conf
 
 echo 
 echo assuming you did it we are creating a soft link now!
 
-sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 echo
 echo congratulations, now we are going to shutdown the system
@@ -94,5 +95,5 @@ echo "shutdown now? (y/n)"
 read shutdown_now
 
 if [ shutdown_now == "y" ]; then
-    sudo shutdown -h now
+    shutdown -h now
 fi

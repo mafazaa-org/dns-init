@@ -49,5 +49,5 @@ echo "127.0.0.1 $server_name" >> /etc/hosts
 # deleting the ubuntu user
 
 if [ $(cat /etc/passwd | grep ubuntu) ]; then
-  deluser --remove-home --remove-all-files ubuntu
+  deluser --remove-home ubuntu
 fi

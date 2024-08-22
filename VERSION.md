@@ -1,5 +1,5 @@
-# v1.0.1
+# v1.0.2
 
-## init.sh
+## define.sh
 
--   asks the user if he wants to edit the sudoers file manually before doing it
+-   runs update.sh correctly

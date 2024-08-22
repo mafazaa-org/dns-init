@@ -1,46 +1,36 @@
 # CHANGELOG
 
-## v1.1.0-beta
-
-### define.sh
-
--   adds env variables, and update.sh to crontab
+## v1-beta
 
 ### init.sh
 
--   adds env variables to crontab
--   asks user before shutdown
--   set a crontab script to rm log file every ten days
+-   must run as root
+-   adds env variables to bashrc and crontab
+-   adds the user dns-admin with the password 'dns-admin' and adds him to sudoers file
+-   copy the ssh keys to dns-admin home directory to enable logging in as dns-admin
 
-### update.sh
+### define.sh (NEW)
+
+-   must run as root
+-   sets the environment variables branch, level and server
+-   adds env variables, and update.sh to .bashrc and crontab
+-   runs the update script and sets it to run every three days
+-   change the password for dns-admin
+-   change hostname
+
+### update.sh (NEW)
 
 -   logs to .dns-logs file
 -   checks if branch env variable exists first
 -   fixes the hostname every time it runs
-
-## v1-beta
-
-### update.sh (NEW)
-
 -   updates all repos or clone them if they don't exist
 -   respect the branch environment variable
 -   runs post_update script if found
-
-### define.sh (NEW)
-
--   sets the environment variables branch, level and server
--   adds them to bashrc
--   removes itself from running at startup
+-   removes the user ubuntu from the machine
 
 ### post_update.sh (NEW)
 
 -   adds the new updated update script to startup
-
-### init.sh
-
--   sets repos names as environment variables
--   adds them to bashrc
--   setup update.sh and define.sh to run at startup
 
 ## v0
 

@@ -1,5 +1,5 @@
-# v1.0.2
+# v1.0.3
 
-## define.sh
+## update.sh
 
--   runs update.sh correctly
+-   gives execution permissions whether it updated or cloned

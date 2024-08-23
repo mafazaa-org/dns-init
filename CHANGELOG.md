@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v1.0.3
+
+### update.sh
+
+-   gives execution permissions whether it updated or cloned
+
 ## v1.0.2
 
 ### define.sh

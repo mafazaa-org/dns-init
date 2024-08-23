@@ -24,12 +24,11 @@ do
         cd $repo
         git fetch --all
         git reset --hard origin/$branch
-        chmod +x *
     else
         echo $(date) : dns-update : INFO :  repo $repo do not exist, cloning it >> $LOG_FILE
         git clone $DNS_REPOS_ROOT/$repo -b $branch
     fi
-
+    chmod +x *
     # if the repo has an update script, run it
     if [ $(ls | grep post_update.sh) ]; then
         echo $(date) : dns-update : INFO :  post updating for $repo >> $LOG_FILE

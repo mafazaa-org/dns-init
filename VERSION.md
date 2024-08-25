@@ -1,5 +1,5 @@
-# v1.0.3
+## v1.0.4
 
-## update.sh
+### update.sh
 
--   gives execution permissions whether it updated or cloned
+-   post update even if it just cloned a repo

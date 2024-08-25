@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v1.0.4
+
+### update.sh
+
+-   post update even if it just cloned a repo
+
 ## v1.0.3
 
 ### update.sh

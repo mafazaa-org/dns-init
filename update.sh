@@ -27,6 +27,7 @@ do
     else
         echo $(date) : dns-update : INFO :  repo $repo do not exist, cloning it >> $LOG_FILE
         git clone $DNS_REPOS_ROOT/$repo -b $branch
+        cd $repo
     fi
     chmod +x *
     # if the repo has an update script, run it

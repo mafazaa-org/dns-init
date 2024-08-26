@@ -1,5 +1,5 @@
-## v1.0.4
+# v1.0.5
 
-### update.sh
+## define.sh
 
--   post update even if it just cloned a repo
+-   solved .dns-logs permission denied bug

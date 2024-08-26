@@ -60,7 +60,11 @@ if [ $(cat /etc/passwd | grep ubuntu) ]; then
   deluser --remove-home ubuntu
 fi
 
-/home/dns-admin/dns-init/update.sh
+touch $home/.dns-logs
+
+chown dns-admin $home/.dns-logs
+
+$home/dns-init/update.sh
 
 echo we have changed your hostname, to see changes, exit and login again
 read
